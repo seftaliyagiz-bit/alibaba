@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ali Baba Leuven — Kebab, Kapsalon & Fast Food · Open tot 06:00</title>
+  <meta name="description" content="Ali Baba op Kortestraat 12 Leuven — kebab, kapsalon, döner, friet. Open tot 06:00. Uber Eats, Deliveroo & Takeaway. Bestel op alibabaleuven.be." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --black:     #000000;
+      --white:     #ffffff;
+      --red:       #d62828;
+      --off-white: #f5f5f5;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      color: var(--black);
+      background: var(--black);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ── FADE-IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ══════════════════════════════
+       NAVBAR
+    ══════════════════════════════ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--black);
+      border-bottom: 2px solid var(--red);
+      height: 60px;
+      display: flex;
+      align-items: center;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo img { max-height: 45px; object-fit: contain; display: block; }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.7);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+    .lang-toggle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      user-select: none;
+      color: rgba(255,255,255,0.4);
+    }
+    .lang-toggle span.active { color: var(--red); }
+    .lang-toggle .sep { margin: 0 4px; }
+
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); transition: all 0.3s; }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: var(--black);
+      border-bottom: 2px solid var(--red);
+      padding: 20px 28px 28px;
+      z-index: 999;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.75);
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .mobile-menu a:last-of-type { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--red); }
+
+    /* ══════════════════════════════
+       HERO — bottom-left editorial
+    ══════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      background-image: url('images/hero.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 80px;
+    }
+    .hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.72); }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .hero-text { flex: 1; }
+    .hero-name {
+      line-height: 0.85;
+      margin-bottom: 20px;
+    }
+    .hero-ali {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(6rem, 16vw, 15rem);
+      color: var(--white);
+      display: block;
+      letter-spacing: -0.01em;
+    }
+    .hero-baba {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(6rem, 16vw, 15rem);
+      color: var(--red);
+      display: block;
+      letter-spacing: -0.01em;
+    }
+    .hero-leuven {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 3.2rem);
+      color: var(--white);
+      display: block;
+      letter-spacing: 0.3em;
+      opacity: 0.6;
+      margin-top: 4px;
+    }
+    .hero-desc {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.04em;
+      line-height: 1.8;
+    }
+    .hero-cta-wrap {
+      flex-shrink: 0;
+      padding-left: 40px;
+      padding-bottom: 8px;
+    }
+    .hero-cta {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.12em;
+      color: var(--red);
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-cta:hover { color: var(--white); }
+    .hero-status {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .pulse-dot { width: 7px; height: 7px; background: var(--red); border-radius: 50%; flex-shrink: 0; animation: pulse 2.2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(1.7); } }
+
+    /* ══════════════════════════════
+       RATINGS BAR
+    ══════════════════════════════ */
+    #ratings {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 36px 28px;
+    }
+    .ratings-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+    .rating-block { text-align: center; flex: 1; }
+    .rating-score {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+    .rating-detail {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.06em;
+      margin-top: 6px;
+    }
+    .ratings-divider {
+      width: 2px;
+      height: 60px;
+      background: var(--red);
+      flex-shrink: 0;
+      margin: 0 48px;
+    }
+
+    /* ══════════════════════════════
+       MENU — price board
+    ══════════════════════════════ */
+    #menu { background: var(--white); padding: 80px 40px; }
+    .menu-inner { max-width: 1100px; margin: 0 auto; }
+    .menu-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      color: var(--black);
+      line-height: 0.9;
+      margin-bottom: 60px;
+      letter-spacing: 0.02em;
+    }
+    .menu-headline span { display: block; }
+    .menu-headline .sub-line {
+      font-size: clamp(1.2rem, 3vw, 2.2rem);
+      color: rgba(0,0,0,0.25);
+      letter-spacing: 0.15em;
+    }
+    .menu-sections {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 80px;
+    }
+    .menu-section { margin-bottom: 40px; }
+    .menu-section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.18em;
+      color: var(--red);
+      border-bottom: 1px solid var(--black);
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+    .menu-item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px dotted rgba(0,0,0,0.15);
+    }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item-name {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 0.92rem;
+      color: var(--black);
+      flex: 1;
+    }
+    .menu-item-dots { flex: 1; border-bottom: 1px dotted rgba(0,0,0,0.2); margin: 0 8px; margin-bottom: 4px; }
+    .menu-item-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.05rem;
+      color: var(--black);
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+    .menu-cta-wrap {
+      margin-top: 52px;
+      padding-top: 40px;
+      border-top: 2px solid var(--black);
+      text-align: center;
+    }
+    .menu-cta-btn {
+      display: inline-block;
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.18em;
+      padding: 18px 48px;
+      transition: background 0.2s;
+    }
+    .menu-cta-btn:hover { background: #b51f1f; }
+
+    /* ══════════════════════════════
+       ABOUT — asymmetric
+    ══════════════════════════════ */
+    #about {
+      background: var(--black);
+      display: grid;
+      grid-template-columns: 60fr 40fr;
+      min-height: 520px;
+    }
+    .about-text {
+      padding: 80px 60px 80px 40px;
+      max-width: 760px;
+    }
+    .about-display {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 9vw, 9rem);
+      color: var(--white);
+      line-height: 0.88;
+      letter-spacing: 0.02em;
+      margin-bottom: 40px;
+    }
+    .about-display .red-line { color: var(--red); }
+    .about-body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.85;
+      max-width: 480px;
+    }
+    .about-img {
+      overflow: hidden;
+    }
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ══════════════════════════════
+       REVIEW QUOTE
+    ══════════════════════════════ */
+    #quote {
+      background: var(--off-white);
+      padding: 80px 40px;
+      text-align: center;
+    }
+    .quote-inner { max-width: 800px; margin: 0 auto; }
+    .quote-mark {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 6rem;
+      color: rgba(0,0,0,0.08);
+      line-height: 0.6;
+      margin-bottom: 16px;
+    }
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      color: var(--black);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .quote-source {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.8rem;
+      color: rgba(0,0,0,0.35);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ══════════════════════════════
+       DELIVERY
+    ══════════════════════════════ */
+    #delivery { background: var(--black); padding: 80px 40px; }
+    .delivery-inner { max-width: 1000px; margin: 0 auto; }
+    .delivery-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 7vw, 6rem);
+      color: var(--white);
+      letter-spacing: 0.05em;
+      margin-bottom: 48px;
+    }
+    .delivery-platforms {
+      display: flex;
+      gap: 0;
+      margin-bottom: 48px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .delivery-item {
+      flex: 1;
+      padding: 28px 24px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.2s;
+    }
+    .delivery-item:last-child { border-right: none; }
+    .delivery-item:hover { background: rgba(255,255,255,0.04); }
+    .delivery-platform-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      color: var(--white);
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .delivery-arrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      color: var(--red);
+      letter-spacing: 0.06em;
+    }
+    .delivery-direct {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.4);
+    }
+    .delivery-direct a {
+      color: var(--white);
+      border-bottom: 1px solid var(--red);
+      padding-bottom: 1px;
+      transition: color 0.2s;
+    }
+    .delivery-direct a:hover { color: var(--red); }
+
+    /* ══════════════════════════════
+       HOURS + CONTACT — split
+    ══════════════════════════════ */
+    #hours-contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 480px;
+    }
+    .hours-side {
+      background: var(--white);
+      padding: 72px 60px 72px 40px;
+    }
+    .hours-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 9vw, 8rem);
+      color: var(--black);
+      line-height: 0.9;
+      margin-bottom: 36px;
+      letter-spacing: 0.02em;
+    }
+    .hours-list {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+    .hours-list li {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 1.05rem;
+      color: var(--black);
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .hours-list li:last-child { border-bottom: none; }
+    .hours-list .day { color: rgba(0,0,0,0.45); font-size: 0.88rem; }
+    .hours-note {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      color: var(--red);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      margin-top: 12px;
+    }
+    .contact-side {
+      background: var(--black);
+      padding: 72px 40px 72px 60px;
+    }
+    .contact-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.2em;
+      margin-bottom: 28px;
+    }
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+    }
+    .contact-detail i { color: var(--red); width: 16px; flex-shrink: 0; margin-top: 3px; font-size: 0.8rem; }
+    .contact-detail a { color: rgba(255,255,255,0.6); transition: color 0.2s; }
+    .contact-detail a:hover { color: var(--red); }
+    .map-wrap { margin-top: 24px; }
+
+    /* Contact form */
+    .contact-form-wrap { margin-top: 32px; }
+    .contact-form-wrap h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.15em;
+      margin-bottom: 18px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .form-group { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+    .form-group input,
+    .form-group textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 0;
+      padding: 11px 14px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.2); }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--red); }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-submit {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      background: var(--red);
+      color: var(--white);
+      border: none;
+      padding: 14px 32px;
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+    .form-submit:hover { background: #b51f1f; }
+    .form-success {
+      display: none;
+      background: rgba(214,40,40,0.1);
+      border: 1px solid rgba(214,40,40,0.3);
+      padding: 14px 18px;
+      color: var(--red);
+      font-size: 0.88rem;
+      margin-top: 10px;
+    }
+
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
+    #footer {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 28px 40px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-left { display: flex; align-items: center; gap: 20px; }
+    .footer-left img { max-height: 35px; object-fit: contain; opacity: 0.7; }
+    .footer-copy {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.04em;
+    }
+    .footer-links { display: flex; gap: 20px; align-items: center; }
+    .footer-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--red);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+    }
+    .footer-links a:hover { opacity: 0.7; }
+
+    /* ══════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════ */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      #hero { padding-bottom: 60px; }
+      .hero-inner { flex-direction: column; align-items: flex-start; padding: 0 20px; }
+      .hero-ali, .hero-baba { font-size: clamp(4.5rem, 20vw, 8rem); }
+      .hero-cta-wrap { padding-left: 0; padding-top: 20px; }
+
+      #ratings { padding: 28px 20px; }
+      .ratings-divider { margin: 0 24px; height: 40px; }
+      .rating-score { font-size: clamp(2.4rem, 9vw, 4rem); }
+
+      #menu { padding: 56px 20px; }
+      .menu-sections { grid-template-columns: 1fr; gap: 0; }
+
+      #about { grid-template-columns: 1fr; }
+      .about-text { padding: 56px 20px; }
+      .about-img { height: 280px; }
+
+      #quote { padding: 60px 20px; }
+
+      #delivery { padding: 60px 20px; }
+      .delivery-platforms { flex-direction: column; }
+      .delivery-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .delivery-item:last-child { border-bottom: none; }
+
+      #hours-contact { grid-template-columns: 1fr; }
+      .hours-side { padding: 56px 20px; }
+      .contact-side { padding: 56px 20px; }
+
+      #footer { padding: 24px 20px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 14px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-ali, .hero-baba { font-size: clamp(4rem, 22vw, 6rem); }
+      .menu-headline { font-size: clamp(2.8rem, 12vw, 5rem); }
+      .about-display { font-size: clamp(3rem, 14vw, 6rem); }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     NAVBAR
+══════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="images/logo.png" alt="Ali Baba Leuven" />
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#menu"    data-nl="MENU"      data-en="MENU">MENU</a></li>
+        <li><a href="#delivery" data-nl="BESTELLEN" data-en="ORDER">BESTELLEN</a></li>
+        <li><a href="#hours-contact" data-nl="CONTACT" data-en="CONTACT">CONTACT</a></li>
+      </ul>
+      <div class="lang-toggle" id="langToggle">
+        <span id="langNL" class="active">NL</span>
+        <span class="sep">|</span>
+        <span id="langEN">EN</span>
+      </div>
+    </div>
+    <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#menu"          data-nl="MENU"      data-en="MENU">MENU</a>
+  <a href="#delivery"      data-nl="BESTELLEN" data-en="ORDER">BESTELLEN</a>
+  <a href="#hours-contact" data-nl="CONTACT"   data-en="CONTACT">CONTACT</a>
+</div>
+
+<!-- ══════════════════════════════
+     HERO
+══════════════════════════════ -->
+<section id="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-name">
+        <span class="hero-ali">ALI</span>
+        <span class="hero-baba">BABA</span>
+        <span class="hero-leuven">LEUVEN</span>
+      </div>
+      <p class="hero-desc">
+        <span data-nl="Kebab · Kapsalon · Döner · Friet<br>Kortestraat 12 · Open tot 06:00"
+              data-en="Kebab · Kapsalon · Döner · Fries<br>Kortestraat 12 · Open until 06:00">
+          Kebab · Kapsalon · Döner · Friet<br>Kortestraat 12 · Open tot 06:00
+        </span>
+      </p>
+    </div>
+    <div class="hero-cta-wrap">
+      <a href="https://www.alibabaleuven.be/en" target="_blank" rel="noopener" class="hero-cta"
+         data-nl="BESTEL →" data-en="ORDER →">BESTEL →</a>
+    </div>
+  </div>
+  <div class="hero-status">
+    <span class="pulse-dot"></span>
+    <span data-nl="Ma–Za: 12:00–06:00 · Zo: 12:00–00:00"
+          data-en="Mon–Sat: 12:00–06:00 · Sun: 12:00–00:00">
+      Ma–Za: 12:00–06:00 · Zo: 12:00–00:00
+    </span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     RATINGS BAR
+══════════════════════════════ -->
+<div id="ratings">
+  <div class="ratings-inner">
+    <div class="rating-block fade-in">
+      <div class="rating-score">4.2<span style="font-size:0.5em;color:rgba(255,255,255,0.3);">/5</span></div>
+      <div class="rating-detail">⭐ TAKEAWAY.COM · 1.079 REVIEWS</div>
+    </div>
+    <div class="ratings-divider"></div>
+    <div class="rating-block fade-in">
+      <div class="rating-score">4.1<span style="font-size:0.5em;color:rgba(255,255,255,0.3);">/5</span></div>
+      <div class="rating-detail">⭐ UBER EATS · 69 REVIEWS</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     MENU — price board
+══════════════════════════════ -->
+<section id="menu">
+  <div class="menu-inner">
+    <div class="menu-headline fade-in">
+      <span data-nl="WAT WIL" data-en="WHAT DO">WAT WIL</span>
+      <span data-nl="JE?" data-en="YOU WANT?">JE?</span>
+      <span class="sub-line" data-nl="KIES JE GERECHT" data-en="CHOOSE YOUR DISH">KIES JE GERECHT</span>
+    </div>
+
+    <div class="menu-sections">
+      <!-- Column 1 -->
+      <div>
+        <div class="menu-section fade-in">
+          <div class="menu-section-title" data-nl="MENU'S (FRIET & DRANK)" data-en="MENUS (FRIES & DRINK)">MENU'S (FRIET &amp; DRANK)</div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Kebab menu" data-en="Kebab menu">Kebab menu</span><span class="menu-item-dots"></span><span class="menu-item-price">€14.90</span></div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Durum menu" data-en="Durum menu">Durum menu</span><span class="menu-item-dots"></span><span class="menu-item-price">€14.90</span></div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Mexicano menu" data-en="Mexicano menu">Mexicano menu</span><span class="menu-item-dots"></span><span class="menu-item-price">€13.90</span></div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Classic burger menu" data-en="Classic burger menu">Classic burger menu</span><span class="menu-item-dots"></span><span class="menu-item-price">€10.50</span></div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Kinder menu" data-en="Kids menu">Kinder menu</span><span class="menu-item-dots"></span><span class="menu-item-price">€8.50</span></div>
+        </div>
+
+        <div class="menu-section fade-in">
+          <div class="menu-section-title" data-nl="DÖNER KLEIN" data-en="DÖNER SMALL">DÖNER KLEIN</div>
+          <div class="menu-item"><span class="menu-item-name">Doner kebab</span><span class="menu-item-dots"></span><span class="menu-item-price">€9.90</span></div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Doner kip" data-en="Doner chicken">Doner kip</span><span class="menu-item-dots"></span><span class="menu-item-price">€9.90</span></div>
+          <div class="menu-item"><span class="menu-item-name">Doner mix</span><span class="menu-item-dots"></span><span class="menu-item-price">€9.90</span></div>
+          <div class="menu-item"><span class="menu-item-name">Veg. doner falafel</span><span class="menu-item-dots"></span><span class="menu-item-price">€8.90</span></div>
+          <div class="menu-item"><span class="menu-item-name">Veg. doner feta</span><span class="menu-item-dots"></span><span class="menu-item-price">€8.90</span></div>
+        </div>
+
+        <div class="menu-section fade-in">
+          <div class="menu-section-title" data-nl="DÖNER GROOT" data-en="DÖNER LARGE">DÖNER GROOT</div>
+          <div class="menu-item"><span class="menu-item-name">Doner kebab</span><span class="menu-item-dots"></span><span class="menu-item-price">€14.50</span></div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Doner kip" data-en="Doner chicken">Doner kip</span><span class="menu-item-dots"></span><span class="menu-item-price">€14.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Doner mix</span><span class="menu-item-dots"></span><span class="menu-item-price">€15.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Veg. doner falafel</span><span class="menu-item-dots"></span><span class="menu-item-price">€12.50</span></div>
+        </div>
+
+        <div class="menu-section fade-in">
+          <div class="menu-section-title">KAPSALON</div>
+          <div class="menu-item"><span class="menu-item-name">Kapsalon kebab</span><span class="menu-item-dots"></span><span class="menu-item-price">€9.90</span></div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Kapsalon kip" data-en="Kapsalon chicken">Kapsalon kip</span><span class="menu-item-dots"></span><span class="menu-item-price">€9.90</span></div>
+          <div class="menu-item">
+            <span class="menu-item-name" style="font-size:0.78rem;color:rgba(0,0,0,0.4);font-style:italic;" data-nl="Friet, sla, tomaat, saus" data-en="Fries, lettuce, tomato, sauce">Friet, sla, tomaat, saus</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2 -->
+      <div>
+        <div class="menu-section fade-in">
+          <div class="menu-section-title" data-nl="SCHOTELS (FRIET, GROENTEN & SAUS)" data-en="PLATTERS (FRIES, VEGGIES & SAUCE)">SCHOTELS (FRIET, GROENTEN &amp; SAUS)</div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Schotel kebab" data-en="Platter kebab">Schotel kebab</span><span class="menu-item-dots"></span><span class="menu-item-price">€19.00</span></div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Schotel kip" data-en="Platter chicken">Schotel kip</span><span class="menu-item-dots"></span><span class="menu-item-price">€19.00</span></div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Schotel pita" data-en="Platter pita">Schotel pita</span><span class="menu-item-dots"></span><span class="menu-item-price">€19.00</span></div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Schotel mix" data-en="Platter mix">Schotel mix</span><span class="menu-item-dots"></span><span class="menu-item-price">€20.00</span></div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Schotel falafel" data-en="Platter falafel">Schotel falafel</span><span class="menu-item-dots"></span><span class="menu-item-price">€16.00</span></div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Schotel köfte" data-en="Platter köfte">Schotel köfte</span><span class="menu-item-dots"></span><span class="menu-item-price">€21.00</span></div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Schotel grill mix" data-en="Platter grill mix">Schotel grill mix</span><span class="menu-item-dots"></span><span class="menu-item-price">€22.00</span></div>
+        </div>
+
+        <div class="menu-section fade-in">
+          <div class="menu-section-title">DURUMS</div>
+          <div class="menu-item"><span class="menu-item-name">Durum kebab</span><span class="menu-item-dots"></span><span class="menu-item-price">€9.90</span></div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Durum kip" data-en="Durum chicken">Durum kip</span><span class="menu-item-dots"></span><span class="menu-item-price">€9.90</span></div>
+        </div>
+
+        <div class="menu-section fade-in">
+          <div class="menu-section-title" data-nl="MITRAILLETTES" data-en="MITRAILLETTES">MITRAILLETTES</div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Div. varianten" data-en="Various options">Div. varianten</span><span class="menu-item-dots"></span><span class="menu-item-price">€8.50+</span></div>
+        </div>
+
+        <div class="menu-section fade-in">
+          <div class="menu-section-title" data-nl="SNACKS & FRIET" data-en="SNACKS & FRIES">SNACKS &amp; FRIET</div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Kleine friet" data-en="Small fries">Kleine friet</span><span class="menu-item-dots"></span><span class="menu-item-price">€2.90</span></div>
+          <div class="menu-item"><span class="menu-item-name" data-nl="Grote friet" data-en="Large fries">Grote friet</span><span class="menu-item-dots"></span><span class="menu-item-price">€3.50+</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="font-size:0.78rem;color:rgba(0,0,0,0.4);font-style:italic;" data-nl="+ diverse sauzen beschikbaar" data-en="+ various sauces available">+ diverse sauzen beschikbaar</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-cta-wrap fade-in">
+      <a href="https://www.alibabaleuven.be/en" target="_blank" rel="noopener" class="menu-cta-btn"
+         data-nl="VOLLEDIG MENU & ONLINE BESTELLEN →"
+         data-en="FULL MENU & ORDER ONLINE →">
+        VOLLEDIG MENU &amp; ONLINE BESTELLEN →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     ABOUT — asymmetric
+══════════════════════════════ -->
+<section id="about">
+  <div class="about-text fade-in">
+    <div class="about-display">
+      <span data-nl="ECHTE" data-en="REAL">ECHTE</span><br>
+      <span class="red-line" data-nl="STAD" data-en="CITY">STAD</span><br>
+      <span data-nl="KEUKEN" data-en="FOOD">KEUKEN</span>
+    </div>
+    <p class="about-body"
+       data-nl="Ali Baba is geen fancy restaurant. Het is de plek waar Leuven eet als het honger heeft. Op Kortestraat, midden in de stad. Open tot 06:00 's nachts — want echte honger wacht niet. Grote porties. Eerlijke prijzen. Al jaren een vaste waarde in Leuven."
+       data-en="Ali Baba is not a fancy restaurant. It's where Leuven eats when it's hungry. On Kortestraat, right in the city. Open until 06:00 — because real hunger doesn't wait. Big portions. Honest prices. A Leuven staple for years.">
+      Ali Baba is geen fancy restaurant. Het is de plek waar Leuven eet als het honger heeft. Op Kortestraat, midden in de stad. Open tot 06:00 's nachts — want echte honger wacht niet. Grote porties. Eerlijke prijzen. Al jaren een vaste waarde in Leuven.
+    </p>
+  </div>
+  <div class="about-img">
+    <img src="images/interior.png" alt="Ali Baba Leuven interieur" />
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     REVIEW QUOTE
+══════════════════════════════ -->
+<div id="quote">
+  <div class="quote-inner fade-in">
+    <div class="quote-mark">"</div>
+    <p class="quote-text">
+      <span data-nl="De kebab sandwich was bijna een meter lang. Ali Baba wint ook de prijs voor gastvrijheid."
+            data-en="The kebab sandwich was almost two feet long. Ali Baba also gets a prize for their hospitality.">
+        De kebab sandwich was bijna een meter lang. Ali Baba wint ook de prijs voor gastvrijheid.
+      </span>
+    </p>
+    <p class="quote-source">— Restaurant Guru</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     DELIVERY
+══════════════════════════════ -->
+<section id="delivery">
+  <div class="delivery-inner">
+    <div class="delivery-title fade-in"
+         data-nl="THUIS ETEN?" data-en="EAT AT HOME?">THUIS ETEN?</div>
+
+    <div class="delivery-platforms fade-in">
+      <div class="delivery-item">
+        <div class="delivery-platform-name">UBER EATS</div>
+        <div class="delivery-arrow">BESTEL →</div>
+      </div>
+      <div class="delivery-item">
+        <div class="delivery-platform-name">DELIVEROO</div>
+        <div class="delivery-arrow">BESTEL →</div>
+      </div>
+      <div class="delivery-item">
+        <div class="delivery-platform-name">TAKEAWAY.COM</div>
+        <div class="delivery-arrow">BESTEL →</div>
+      </div>
+    </div>
+
+    <p class="delivery-direct fade-in">
+      <span data-nl="Of bestel rechtstreeks op onze website" data-en="Or order directly on our website">Of bestel rechtstreeks op onze website</span>
+      &nbsp;→&nbsp;
+      <a href="https://www.alibabaleuven.be/en" target="_blank" rel="noopener">alibabaleuven.be</a>
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     HOURS + CONTACT
+══════════════════════════════ -->
+<div id="hours-contact">
+  <!-- Hours -->
+  <div class="hours-side">
+    <div class="hours-label fade-in">OPEN</div>
+    <ul class="hours-list fade-in">
+      <li>
+        <span class="day" data-nl="Ma – Za" data-en="Mon – Sat">Ma – Za</span>
+        <span>12:00 – 06:00</span>
+      </li>
+      <li>
+        <span class="day" data-nl="Zondag" data-en="Sunday">Zondag</span>
+        <span>12:00 – 00:00</span>
+      </li>
+    </ul>
+    <p class="hours-note fade-in">
+      <span data-nl="Ja. Tot 06:00 's nachts." data-en="Yes. Until 06:00 AM.">Ja. Tot 06:00 's nachts.</span>
+    </p>
+  </div>
+
+  <!-- Contact -->
+  <div class="contact-side">
+    <div class="contact-label">CONTACT</div>
+    <div class="contact-detail fade-in">
+      <i class="fa-solid fa-location-dot"></i>
+      <span>Kortestraat 12-14, 3000 Leuven</span>
+    </div>
+    <div class="contact-detail fade-in">
+      <i class="fa-solid fa-phone"></i>
+      <a href="tel:+3216220646">+32 16 22 06 46</a>
+    </div>
+    <div class="contact-detail fade-in">
+      <i class="fa-solid fa-envelope"></i>
+      <a href="mailto:Tansunmus@hotmail.com">Tansunmus@hotmail.com</a>
+    </div>
+    <div class="contact-detail fade-in">
+      <i class="fa-solid fa-globe"></i>
+      <a href="https://alibabaleuven.be" target="_blank" rel="noopener">alibabaleuven.be</a>
+    </div>
+
+    <div class="map-wrap fade-in">
+      <iframe
+        src="https://www.google.com/maps?q=Kortestraat+12,+3000+Leuven&output=embed"
+        width="100%" height="220"
+        style="border:0;display:block;"
+        allowfullscreen loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+    <div class="contact-form-wrap fade-in">
+      <h3 data-nl="STUUR EEN BERICHT" data-en="SEND A MESSAGE">STUUR EEN BERICHT</h3>
+      <form id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <input type="text" id="fname"
+                   data-placeholder-nl="Naam"
+                   data-placeholder-en="Name"
+                   placeholder="Naam" required />
+          </div>
+          <div class="form-group">
+            <input type="email" id="femail"
+                   data-placeholder-nl="Email"
+                   data-placeholder-en="Email"
+                   placeholder="Email" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea id="fmessage"
+                    data-placeholder-nl="Bericht..."
+                    data-placeholder-en="Message..."
+                    placeholder="Bericht..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit"
+                data-nl="VERSTUUR →" data-en="SEND →">VERSTUUR →</button>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <span data-nl="Bedankt! We antwoorden zo snel mogelijk."
+              data-en="Thanks! We'll get back to you soon.">
+          Bedankt! We antwoorden zo snel mogelijk.
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <img src="images/logo.png" alt="Ali Baba" />
+      <span class="footer-copy">
+        <span data-nl="© 2026 Ali Baba · Kortestraat 12 · Leuven · Tot 06:00"
+              data-en="© 2026 Ali Baba · Kortestraat 12 · Leuven · Until 06:00">
+          © 2026 Ali Baba · Kortestraat 12 · Leuven · Tot 06:00
+        </span>
+      </span>
+    </div>
+    <div class="footer-links">
+      <a href="https://facebook.com/p/Ali-Baba-Leuven" target="_blank" rel="noopener">FACEBOOK</a>
+      <a href="https://www.alibabaleuven.be/en" target="_blank" rel="noopener">UBER EATS</a>
+      <a href="https://www.alibabaleuven.be/en" target="_blank" rel="noopener">TAKEAWAY</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════
+     JAVASCRIPT
+══════════════════════════════ -->
+<script>
+  /* ── Language system ── */
+  let currentLang = 'nl';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-nl]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val === null) return;
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = val;
+      } else {
+        el.innerHTML = val;
+      }
+    });
+
+    document.querySelectorAll('[data-placeholder-' + lang + ']').forEach(el => {
+      el.placeholder = el.getAttribute('data-placeholder-' + lang);
+    });
+
+    document.getElementById('langNL').classList.toggle('active', lang === 'nl');
+    document.getElementById('langEN').classList.toggle('active', lang === 'en');
+  }
+
+  document.getElementById('langToggle').addEventListener('click', e => {
+    const t = e.target.closest('#langNL, #langEN');
+    if (!t) return;
+    setLang(t.id === 'langNL' ? 'nl' : 'en');
+  });
+
+  /* ── Hamburger ── */
+  const hamburger  = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  /* ── Smooth scroll ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  /* ── IntersectionObserver ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  /* ── Contact form ── */
+  const form        = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!document.getElementById('fname').value.trim())    return;
+    if (!document.getElementById('femail').value.trim())   return;
+    if (!document.getElementById('fmessage').value.trim()) return;
+    form.style.display = 'none';
+    formSuccess.style.display = 'block';
+  });
+
+  /* ── Init ── */
+  setLang('nl');
+</script>
+
+</body>
+</html>
